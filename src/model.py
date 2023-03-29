@@ -62,13 +62,13 @@ class BaseModel(nn.Module):
 
 # 16-layer model
 class StudentModel(BaseModel):
-    def __init__(self, input_dim=3):
+    def __init__(self, input_dim=3, output_dim=10):
         super().__init__()
         self.layer1 = self._make_student_layer(4, input_dim, 16)
         self.layer2 = self._make_student_layer(4, 16, 32)
         self.layer3 = self._make_student_layer(4, 32, 64)
         self.layer4 = self._make_student_layer(4, 64, 128)
-        self.mlp = MLP(128, 128, 10)
+        self.mlp = MLP(128, 128, output_dim)
         self.maxpool = nn.MaxPool2d(3, stride=2)
     
     def forward(self, x):
@@ -94,13 +94,13 @@ class StudentModel(BaseModel):
     
 # 12-layer model
 class TeacherAssistantModel(BaseModel):
-    def __init__(self, input_dim=3):
+    def __init__(self, input_dim=3, output_dim=10):
         super().__init__()
         self.layer1 = self._make_student_layer(3, input_dim, 32)
         self.layer2 = self._make_student_layer(3, 32, 64)
         self.layer3 = self._make_student_layer(3, 64, 128)
         self.layer4 = self._make_student_layer(3, 128, 256)
-        self.mlp = MLP(256, 128, 10)
+        self.mlp = MLP(256, 128, output_dim)
         self.maxpool = nn.MaxPool2d(3, stride=2)
         
     def forward(self, x):
@@ -361,26 +361,26 @@ class ResNetStudent(nn.Module):
         x = self.maxpool(x)
         return x
     
-def resnet18():
-    return ResNet(BasicBlock, [2,2,2,2])
+def resnet18(output_dim=10):
+    return ResNet(BasicBlock, [2,2,2,2], num_classes=output_dim)
 
-def resnet34():
-    return ResNet(BasicBlock, [3,4,6,3])
+def resnet34(output_dim=10):
+    return ResNet(BasicBlock, [3,4,6,3], num_classes=output_dim)
 
-def resnet50():
-    return ResNet(BottleNeck, [3,4,6,3])
+def resnet50(output_dim=10):
+    return ResNet(BottleNeck, [3,4,6,3], num_classes=output_dim)
 
-def resnet101():
-    return ResNet(BottleNeck, [3,4,23,3])
+def resnet101(output_dim=10):
+    return ResNet(BottleNeck, [3,4,23,3], num_classes=output_dim)
 
-def resnet152():
-    return ResNet(BottleNeck, [3,8,36,3])
+def resnet152(output_dim=10):
+    return ResNet(BottleNeck, [3,8,36,3], num_classes=output_dim)
 
-def resnet_assistant():
-    return ResNetAssistant(BottleNeck, [4,6,9,4])
+def resnet_assistant(output_dim=10):
+    return ResNetAssistant(BottleNeck, [4,6,9,4], num_classes=output_dim)
 
-def resnet_student():
-    return ResNetStudent(BottleNeck, [6,8,12,6])
+def resnet_student(output_dim=10):
+    return ResNetStudent(BottleNeck, [6,8,12,6], num_classes=output_dim)
 
 if __name__ == '__main__':
     x = torch.randn((4, 3, 32, 32))

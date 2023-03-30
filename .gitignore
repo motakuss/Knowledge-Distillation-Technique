@@ -1,5 +1,6 @@
 # log file / Training data
-data/
+/data/cifar10
+/data/cifar100
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

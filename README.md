@@ -9,12 +9,6 @@
 * CNN Model Compression by Merit-based Distillation, Morikawa, 2023
 
 ## setup
-If Anaconda is used : 
-```
-conda create -n hoge python=3.8
-conda activate hoge
-```
-If venv is used : 
 ```
 python3 -m venv venv
 source venv/bin/activate

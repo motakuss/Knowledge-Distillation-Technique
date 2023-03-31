@@ -42,7 +42,7 @@ python train.py --model_type normal --model_size teacher --epoch 100 --batch_siz
 * --num_class -> [10, 100]
     - If 10 is selected, the training will be conducted using CIFAR-10, and if 100 is selected, the training will be conducted using CIFAR-100.
 
-The case of train_kd.py : 
+The case of train_kd.py :   
 This program is used to obtain the results of the using distillation method.
 ```
 python train_kd.py --model_type normal --epoch 100 --batch_size 128 --num_class 10 --kd st
